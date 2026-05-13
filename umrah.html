@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رحلة العمرة - منصة الإرشاد الذكي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a8e8e;
+            --secondary: #0d6a6a;
+            --accent: #e8b86d;
+            --gold: #d4af37;
+            --dark: #1a2332;
+            --light: #f5f7fa;
+            --success: #27ae60;
+            --text: #2c3e50;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: white;
+            color: var(--text);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Amiri', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .back-btn {
+            padding: 10px 25px;
+            background: var(--light);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Page Content */
+        .page-content {
+            padding: 100px 40px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-title {
+            font-family: 'Amiri', serif;
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .page-subtitle {
+            font-size: 20px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Steps Navigation */
+        .steps-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+
+        .step-nav-item {
+            padding: 12px 25px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .step-nav-item:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .step-nav-item.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Step Content */
+        .step-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8f4f4 100%);
+            border-radius: 25px;
+            padding: 50px;
+            margin-bottom: 30px;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .step-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .step-description {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .details-box {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+
+        .details-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .details-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .details-list li {
+            padding: 15px 0;
+            padding-right: 35px;
+            border-bottom: 1px solid #f0f0f0;
+            position: relative;
+            font-size: 17px;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .details-list li:last-child {
+            border-bottom: none;
+        }
+
+        .details-list li::before {
+            content: '✓';
+            position: absolute;
+            right: 0;
+            color: var(--success);
+            font-weight: 900;
+            font-size: 20px;
+        }
+
+        .sunnah-box {
+            background: linear-gradient(135deg, #fff8e7 0%, #ffe8b8 100%);
+            border: 3px solid var(--gold);
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+        .sunnah-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #8b6914;
+            margin-bottom: 15px;
+        }
+
+        .sunnah-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sunnah-list li {
+            padding: 10px 0;
+            padding-right: 30px;
+            font-size: 16px;
+            color: #5a4a0f;
+            position: relative;
+            line-height: 1.7;
+        }
+
+        .sunnah-list li::before {
+            content: '◆';
+            position: absolute;
+            right: 0;
+            color: var(--gold);
+            font-size: 12px;
+        }
+
+        /* Interactive Counter */
+        .counter-section {
+            background: white;
+            border-radius: 25px;
+            padding: 50px;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .counter-display {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 20px 50px rgba(10, 142, 142, 0.4);
+            position: relative;
+        }
+
+        .counter-display::before {
+            content: '';
+            position: absolute;
+            inset: -15px;
+            border-radius: 50%;
+            border: 3px dashed var(--accent);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .counter-number {
+            font-size: 100px;
+            font-weight: 900;
+            font-family: 'Amiri', serif;
+            line-height: 1;
+        }
+
+        .counter-label {
+            font-size: 20px;
+            margin-top: 15px;
+            opacity: 0.95;
+        }
+
+        .progress-circles {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 3px solid #ddd;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #ddd;
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+
+        .circle.completed {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+            animation: pop 0.3s;
+        }
+
+        @keyframes pop {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .action-btn {
+            padding: 20px 60px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0 10px;
+        }
+
+        .action-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(10, 142, 142, 0.3);
+        }
+
+        .action-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .dua-box {
+            background: linear-gradient(135deg, #fff8e7 0%, #ffe8b8 100%);
+            padding: 30px;
+            border-radius: 20px;
+            border: 3px solid var(--gold);
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .dua-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #8b6914;
+            margin-bottom: 15px;
+        }
+
+        .dua-text {
+            font-family: 'Amiri', serif;
+            font-size: 24px;
+            color: #5a4a0f;
+            line-height: 1.8;
+            font-weight: 700;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-150px);
+            background: var(--success);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            font-size: 18px;
+            z-index: 2000;
+            transition: all 0.4s;
+            opacity: 0;
+        }
+
+        .notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 32px; }
+            .step-card { padding: 30px; }
+            .counter-section { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">منصة الإرشاد الذكي</div>
+            <a href="index.html" class="back-btn">← العودة للرئيسية</a>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <div class="page-header">
+            <h1 class="page-title">رحلة العمرة الكاملة</h1>
+            <p class="page-subtitle">سنرافقك في كل خطوة من مناسك العمرة بالتفصيل</p>
+        </div>
+
+        <!-- Steps Navigation -->
+        <div class="steps-nav">
+            <div class="step-nav-item active" onclick="showStep(1)">1. الإحرام</div>
+            <div class="step-nav-item" onclick="showStep(2)">2. الطواف</div>
+            <div class="step-nav-item" onclick="showStep(3)">3. السعي</div>
+            <div class="step-nav-item" onclick="showStep(4)">4. الحلق/التقصير</div>
+        </div>
+
+        <!-- Step 1: Ihram -->
+        <div class="step-content active" id="step1">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h2 class="step-title">الإحرام</h2>
+                <p class="step-description">أول خطوة في العمرة، وهو نية الدخول في النسك مع لبس ثياب الإحرام عند الميقات</p>
+
+                <div class="details-box">
+                    <h3 class="details-title">الخطوات الأساسية:</h3>
+                    <ul class="details-list">
+                        <li>لبس ثياب الإحرام (إزار ورداء للرجل)</li>
+                        <li>النية: "لبيك اللهم عمرة"</li>
+                        <li>التلبية: "لبيك اللهم لبيك، لبيك لا شريك لك لبيك"</li>
+                    </ul>
+                </div>
+
+                <div class="sunnah-box">
+                    <h3 class="sunnah-title">السنن والمستحبات:</h3>
+                    <ul class="sunnah-list">
+                        <li>الاغتسال قبل الإحرام</li>
+                        <li>التطيب في البدن قبل الإحرام (لا في الثوب)</li>
+                        <li>صلاة ركعتين قبل الإحرام</li>
+                        <li>الإكثار من التلبية خاصة عند تغير الأحوال</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <button class="action-btn" onclick="showStep(2)">التالي: الطواف ←</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Tawaf -->
+        <div class="step-content" id="step2">
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h2 class="step-title">الطواف</h2>
+                <p class="step-description">الطواف حول الكعبة سبعة أشواط، يبدأ من الحجر الأسود وينتهي به</p>
+
+                <div class="details-box">
+                    <h3 class="details-title">الخطوات الأساسية:</h3>
+                    <ul class="details-list">
+                        <li>استلام الحجر الأسود أو الإشارة إليه قائلاً "الله أكبر"</li>
+                        <li>الطواف 7 أشواط عكس عقارب الساعة</li>
+                        <li>الدعاء والذكر أثناء الطواف</li>
+                        <li>قول "ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة" بين الركنين</li>
+                        <li>صلاة ركعتين بعد الطواف (خلف المقام إن تيسر)</li>
+                    </ul>
+                </div>
+
+                <div class="sunnah-box">
+                    <h3 class="sunnah-title">السنن والمستحبات:</h3>
+                    <ul class="sunnah-list">
+                        <li>تقبيل الحجر الأسود إن أمكن بدون مزاحمة</li>
+                        <li>الاضطباع للرجال (جعل الرداء تحت الإبط الأيمن)</li>
+                        <li>الرَمَل في الأشواط الثلاثة الأولى للرجال (الإسراع مع تقارب الخطى)</li>
+                        <li>استلام الركن اليماني إن تيسر</li>
+                    </ul>
+                </div>
+
+                <!-- Interactive Counter -->
+                <div class="counter-section">
+                    <h3 style="font-size: 24px; color: var(--primary); margin-bottom: 30px;">عداد الطواف التفاعلي</h3>
+                    <div class="counter-display">
+                        <div class="counter-number" id="tawafCounter">0</div>
+                        <div class="counter-label">من 7 أشواط</div>
+                    </div>
+                    <div class="progress-circles" id="tawafProgress">
+                        <div class="circle">1</div>
+                        <div class="circle">2</div>
+                        <div class="circle">3</div>
+                        <div class="circle">4</div>
+                        <div class="circle">5</div>
+                        <div class="circle">6</div>
+                        <div class="circle">7</div>
+                    </div>
+                    <button class="action-btn" id="tawafBtn" onclick="incrementTawaf()">شوط جديد</button>
+                    <button class="action-btn" onclick="resetTawaf()" style="background: #95a5a6;">إعادة</button>
+                    <div class="dua-box">
+                        <div class="dua-title">الدعاء المناسب</div>
+                        <div class="dua-text" id="tawafDua">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <button class="action-btn" onclick="showStep(3)">التالي: السعي ←</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Sa'i -->
+        <div class="step-content" id="step3">
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h2 class="step-title">السعي بين الصفا والمروة</h2>
+                <p class="step-description">السعي سبعة أشواط بين جبلي الصفا والمروة، يبدأ من الصفا وينتهي بالمروة</p>
+
+                <div class="details-box">
+                    <h3 class="details-title">الخطوات الأساسية:</h3>
+                    <ul class="details-list">
+                        <li>البدء من الصفا</li>
+                        <li>قراءة: "إِنَّ الصَّفَا وَالْمَرْوَةَ مِن شَعَائِرِ اللَّهِ"</li>
+                        <li>السعي إلى المروة (هذا شوط واحد)</li>
+                        <li>العودة من المروة إلى الصفا (شوط ثاني)</li>
+                        <li>تكرار ذلك حتى إتمام 7 أشواط تنتهي بالمروة</li>
+                        <li>الذكر والدعاء أثناء السعي</li>
+                    </ul>
+                </div>
+
+                <div class="sunnah-box">
+                    <h3 class="sunnah-title">السنن والمستحبات:</h3>
+                    <ul class="sunnah-list">
+                        <li>الصعود على الصفا والمروة واستقبال القبلة</li>
+                        <li>الهرولة بين العلمين الأخضرين للرجال فقط</li>
+                        <li>الإكثار من الذكر والدعاء خاصة على الصفا والمروة</li>
+                    </ul>
+                </div>
+
+                <!-- Interactive Counter -->
+                <div class="counter-section">
+                    <h3 style="font-size: 24px; color: var(--primary); margin-bottom: 30px;">عداد السعي التفاعلي</h3>
+                    <div class="counter-display">
+                        <div class="counter-number" id="saiCounter">0</div>
+                        <div class="counter-label">من 7 أشواط</div>
+                    </div>
+                    <div class="progress-circles" id="saiProgress">
+                        <div class="circle">1</div>
+                        <div class="circle">2</div>
+                        <div class="circle">3</div>
+                        <div class="circle">4</div>
+                        <div class="circle">5</div>
+                        <div class="circle">6</div>
+                        <div class="circle">7</div>
+                    </div>
+                    <button class="action-btn" id="saiBtn" onclick="incrementSai()">شوط جديد</button>
+                    <button class="action-btn" onclick="resetSai()" style="background: #95a5a6;">إعادة</button>
+                    <div class="dua-box">
+                        <div class="dua-title">الدعاء المناسب</div>
+                        <div class="dua-text" id="saiDua">رَبِّ اغْفِرْ وَارْحَمْ إِنَّكَ أَنتَ الأَعَزُّ الأَكْرَمُ</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <button class="action-btn" onclick="showStep(4)">التالي: الحلق/التقصير ←</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Halq/Taqsir -->
+        <div class="step-content" id="step4">
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h2 class="step-title">الحلق أو التقصير</h2>
+                <p class="step-description">حلق شعر الرأس كاملاً أو تقصيره، والحلق أفضل للرجال</p>
+
+                <div class="details-box">
+                    <h3 class="details-title">الخطوات الأساسية:</h3>
+                    <ul class="details-list">
+                        <li>الرجال: الحلق (أفضل) أو التقصير من جميع جوانب الرأس</li>
+                        <li>النساء: التقصير فقط (قدر أنملة من أطراف الشعر)</li>
+                        <li>بهذا تتم العمرة ويحل جميع محظورات الإحرام</li>
+                    </ul>
+                </div>
+
+                <div class="sunnah-box">
+                    <h3 class="sunnah-title">ملاحظات مهمة:</h3>
+                    <ul class="sunnah-list">
+                        <li>الحلق أفضل من التقصير للرجال (27 درجة أكثر أجراً)</li>
+                        <li>يجب أن يشمل جميع الرأس</li>
+                        <li>الدعاء: "الحمد لله الذي قضى عنا نسكنا"</li>
+                    </ul>
+                </div>
+
+                <div class="details-box" style="background: linear-gradient(135deg, #e8f8f5 0%, #d0f0e4 100%); border: 3px solid var(--success); margin-top: 30px;">
+                    <h3 class="details-title" style="color: var(--success); text-align: center; font-size: 28px;">تمت العمرة بحمد الله</h3>
+                    <p style="text-align: center; font-size: 18px; color: #666; margin-top: 15px; line-height: 1.8;">
+                        بهذا تكتمل مناسك العمرة، تقبل الله منا ومنكم<br>
+                        نسأل الله أن يتقبل منا ومنكم صالح الأعمال
+                    </p>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <button class="action-btn" onclick="window.location.href='index.html'" style="background: var(--success);">العودة للرئيسية</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let tawafCount = 0;
+        let saiCount = 0;
+
+        const tawafDuas = [
+            "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+            "سُبْحَانَ اللهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ",
+            "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالآخِرَةِ",
+            "رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ",
+            "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ وَعَذَابِ النَّارِ",
+            "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ",
+            "اللَّهُمَّ تَقَبَّلْ مِنَّا وَاغْفِرْ لَنَا إِنَّكَ أَنْتَ التَّوَّابُ الرَّحِيمُ"
+        ];
+
+        const saiDuas = [
+            "رَبِّ اغْفِرْ وَارْحَمْ إِنَّكَ أَنتَ الأَعَزُّ الأَكْرَمُ",
+            "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",
+            "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ",
+            "اللَّهُ أَكْبَرُ اللَّهُ أَكْبَرُ اللَّهُ أَكْبَرُ وَلِلَّهِ الْحَمْدُ",
+            "اللَّهُمَّ اغْفِرْ وَارْحَمْ وَتَجَاوَزْ عَمَّا تَعْلَمُ",
+            "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً",
+            "اللَّهُمَّ إِنَّكَ عَفُوٌّ كَرِيمٌ تُحِبُّ الْعَفْوَ فَاعْفُ عَنَّا"
+        ];
+
+        function showStep(stepNum) {
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.step-nav-item').forEach(s => s.classList.remove('active'));
+            
+            document.getElementById('step' + stepNum).classList.add('active');
+            document.querySelectorAll('.step-nav-item')[stepNum - 1].classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function incrementTawaf() {
+            if (tawafCount >= 7) return;
+            
+            tawafCount++;
+            document.getElementById('tawafCounter').textContent = tawafCount;
+            
+            const circles = document.querySelectorAll('#tawafProgress .circle');
+            circles[tawafCount - 1].classList.add('completed');
+            
+            document.getElementById('tawafDua').textContent = tawafDuas[tawafCount - 1];
+            
+            if (tawafCount < 7) {
+                showNotification(`تم إكمال الشوط ${tawafCount} - بقي ${7 - tawafCount}`);
+            } else {
+                showNotification('مبارك! تم إكمال الطواف - تقبل الله منك');
+                document.getElementById('tawafBtn').disabled = true;
+                document.getElementById('tawafBtn').textContent = 'اكتمل الطواف';
+            }
+        }
+
+        function resetTawaf() {
+            tawafCount = 0;
+            document.getElementById('tawafCounter').textContent = '0';
+            document.getElementById('tawafDua').textContent = tawafDuas[0];
+            document.getElementById('tawafBtn').disabled = false;
+            document.getElementById('tawafBtn').textContent = 'شوط جديد';
+            
+            document.querySelectorAll('#tawafProgress .circle').forEach(c => c.classList.remove('completed'));
+            showNotification('تم إعادة تعيين عداد الطواف');
+        }
+
+        function incrementSai() {
+            if (saiCount >= 7) return;
+            
+            saiCount++;
+            document.getElementById('saiCounter').textContent = saiCount;
+            
+            const circles = document.querySelectorAll('#saiProgress .circle');
+            circles[saiCount - 1].classList.add('completed');
+            
+            document.getElementById('saiDua').textContent = saiDuas[saiCount - 1];
+            
+            if (saiCount < 7) {
+                showNotification(`تم إكمال الشوط ${saiCount} - بقي ${7 - saiCount}`);
+            } else {
+                showNotification('مبارك! تم إكمال السعي - تقبل الله منك');
+                document.getElementById('saiBtn').disabled = true;
+                document.getElementById('saiBtn').textContent = 'اكتمل السعي';
+            }
+        }
+
+        function resetSai() {
+            saiCount = 0;
+            document.getElementById('saiCounter').textContent = '0';
+            document.getElementById('saiDua').textContent = saiDuas[0];
+            document.getElementById('saiBtn').disabled = false;
+            document.getElementById('saiBtn').textContent = 'شوط جديد';
+            
+            document.querySelectorAll('#saiProgress .circle').forEach(c => c.classList.remove('completed'));
+            showNotification('تم إعادة تعيين عداد السعي');
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
