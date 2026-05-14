@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hajj Journey - Smart Guidance Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #0a8e8e; --secondary: #0d6a6a; --gold: #d4af37; --light: #f5f7fa; --success: #27ae60; --text: #2c3e50; }
+        body { font-family: 'Cairo', sans-serif; background: white; color: var(--text); }
+        .navbar { background: white; box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1); padding: 20px 0; position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Georgia', serif; font-size: 24px; font-weight: 700; color: var(--primary); }
+        .back-btn { padding: 10px 25px; background: var(--light); color: var(--primary); border: 2px solid var(--primary); border-radius: 20px; font-weight: 600; cursor: pointer; transition: all 0.3s; text-decoration: none; }
+        .back-btn:hover { background: var(--primary); color: white; }
+        .page-content { padding: 100px 40px 60px; max-width: 1200px; margin: 0 auto; min-height: 80vh; }
+        .page-header { text-align: center; margin-bottom: 60px; }
+        .page-title { font-family: 'Georgia', serif; font-size: 48px; color: var(--primary); margin-bottom: 15px; font-weight: 700; }
+        .page-subtitle { font-size: 20px; color: #666; line-height: 1.6; }
+        .coming-soon-box { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); border-radius: 30px; padding: 80px 60px; text-align: center; color: white; margin-top: 60px; }
+        .coming-soon-icon { font-size: 120px; margin-bottom: 30px; }
+        .coming-soon-title { font-size: 42px; font-weight: 700; margin-bottom: 25px; font-family: 'Georgia', serif; }
+        .coming-soon-text { font-size: 20px; line-height: 1.8; margin-bottom: 40px; opacity: 0.95; }
+        .feature-preview { background: white; border-radius: 25px; padding: 40px; margin-top: 40px; }
+        .feature-preview h3 { font-size: 28px; color: var(--primary); margin-bottom: 30px; text-align: center; }
+        .preview-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .preview-item { background: var(--light); padding: 25px; border-radius: 20px; border-left: 4px solid var(--gold); }
+        .preview-item h4 { font-size: 18px; color: var(--primary); margin-bottom: 12px; }
+        .preview-item p { font-size: 14px; color: #666; line-height: 1.6; }
+        .action-btn { display: inline-block; padding: 18px 45px; background: white; color: var(--primary); border: 3px solid white; border-radius: 30px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.3s; text-decoration: none; margin: 10px; }
+        .action-btn:hover { background: var(--gold); border-color: var(--gold); color: white; transform: translateY(-3px); }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Smart Guidance Platform</div>
+            <a href="index_en.html" class="back-btn">← Back to Home</a>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <div class="page-header">
+            <h1 class="page-title">Complete Hajj Journey</h1>
+            <p class="page-subtitle">Coming Soon: Your comprehensive guide for Hajj rituals</p>
+        </div>
+
+        <div class="coming-soon-box">
+            <div class="coming-soon-icon">🕋</div>
+            <h2 class="coming-soon-title">Under Development</h2>
+            <p class="coming-soon-text">
+                We are currently developing the complete Hajj journey with all rituals in detail<br>
+                Including days of Tashreeq, standing at Arafat, staying in Muzdalifah and Mina, and stoning the Jamarat
+            </p>
+            <a href="index_en.html" class="action-btn">Back to Home</a>
+            <a href="umrah_en.html" class="action-btn">Try Umrah</a>
+        </div>
+
+        <div class="feature-preview">
+            <h3>What will the Hajj guide include?</h3>
+            <div class="preview-grid">
+                <div class="preview-item">
+                    <h4>1. Day of Tarwiyah (8th Dhul Hijjah)</h4>
+                    <p>Ihram from Makkah and proceeding to Mina with detailed guidance</p>
+                </div>
+                <div class="preview-item">
+                    <h4>2. Day of Arafat (9th Dhul Hijjah)</h4>
+                    <p>Standing at Arafat with time, location, and recommended supplications</p>
+                </div>
+                <div class="preview-item">
+                    <h4>3. Night at Muzdalifah</h4>
+                    <p>Staying in Muzdalifah and collecting pebbles with real-time guidance</p>
+                </div>
+                <div class="preview-item">
+                    <h4>4. Day of Nahr (10th Dhul Hijjah)</h4>
+                    <p>Stoning Jamrat al-Aqabah, sacrifice, shaving, Tawaf al-Ifadah</p>
+                </div>
+                <div class="preview-item">
+                    <h4>5. Days of Tashreeq</h4>
+                    <p>Staying in Mina and stoning the three Jamarat in remaining days</p>
+                </div>
+                <div class="preview-item">
+                    <h4>6. Farewell Tawaf</h4>
+                    <p>Final Tawaf before departing from Makkah al-Mukarramah</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
